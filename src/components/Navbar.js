@@ -8,7 +8,7 @@ export default function Navbar() {
       <ul className="flex justify-center gap-8 my-4">
         <li className="active">Home</li>
         <li className="">Category</li>
-        <li className="">Popular</li>
+        <li className="">Area</li>
       </ul>
       <div className=" flex justify-center mx-8">
         <div className="w-10 h-10 flex justify-center items-center  rounded-y-2xl rounded-l-2xl bg-gray-100 ">
