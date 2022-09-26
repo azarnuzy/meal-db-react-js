@@ -12,7 +12,7 @@ export default function Meals() {
       const client = axios.create({
         baseURL: 'https://www.themealdb.com/api/json/v1/1',
       });
-      let response = await client.get('/search.php?f=b');
+      let response = await client.get('/search.php?s=');
       setMeals(response.data.meals);
     };
 

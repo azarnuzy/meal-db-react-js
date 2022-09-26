@@ -1,7 +1,8 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-export default function Navbar() {
+export default function Navbar({ meal, setMeal, handleKeyPressed }) {
+  console.log(meal);
   return (
     <nav>
       <div className="w-20 h-20 m-auto absolute top-0 right-1/2 transform rotate-45 translate-x-1/2 -z-10 -translate-y-[45%] rounded-md bg-primary"></div>
@@ -29,6 +30,9 @@ export default function Navbar() {
         <input
           id="search-input"
           type="text"
+          value={meal}
+          onChange={(e) => setMeal(e.target.value)}
+          onKeyDown={(e) => handleKeyPressed(e)}
           className="w-full rounded-y-2xl rounded-r-2xl bg-gray-100 "
           placeholder="Search Meal and more"
         />

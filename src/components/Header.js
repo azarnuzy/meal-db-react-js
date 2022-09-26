@@ -1,6 +1,6 @@
 import React from 'react';
 import restaurant from '../restaurant2.png';
-export default function Header() {
+export default function Header({ meal, setMeal }) {
   return (
     <header className="mx-2 rounded-lg bg-primary pt-5 px-7 flex flex-col items-start mt-5 h-[65vh] -z-[100] relative">
       <h1 className="font-semibold text-3xl mt-5">Meal</h1>
