@@ -45,11 +45,11 @@ export default function Detail() {
           className="max-h-[300px] w-screen object-cover rounded-xl shadow-md"
           alt=""
         />
-        <span className="mt-3 ml-2 font-bold text-xl block ">
+        <span className="mt-3 ml-2 font-bold text-lg block ">
           {meal[0].strMeal}
         </span>
         <div className="mt-1 mx-3 border-b-2 border-solid border-slate-200 pb-3">
-          <table className="text-left text-lg mb-3 mr-0">
+          <table className="text-left text-md mb-3 mr-0">
             <tbody>
               <tr>
                 <th className="w-[30vw]">Category</th>
@@ -65,13 +65,13 @@ export default function Detail() {
               </tr>
             </tbody>
           </table>
-          <span className="text-justify inline-block">
+          <span className="text-justify text-sm inline-block">
             {meal[0].strInstructions}
           </span>
         </div>
-        <h3 className="text-xl font-semibold mt-2 mx-3">Ingredients</h3>
+        <h3 className="text-lg font-semibold mt-2 mx-3">Ingredients</h3>
         <div className="mt-2 mx-3 border border-solid border-slate-200 shadow-md">
-          <ul className="list-ingredients  p-3 list-none">
+          <ul className="list-ingredients text-sm p-3 list-none">
             <li>
               {meal[0].strMeasure1} {meal[0].strIngredient1}
             </li>

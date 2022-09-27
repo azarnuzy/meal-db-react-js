@@ -5,6 +5,9 @@ export default function Header({ meal, setMeal }) {
     <header className="mx-2 rounded-lg bg-primary pt-5 px-7 flex flex-col items-start mt-5 h-[65vh] -z-[100] relative">
       <h1 className="font-semibold text-3xl mt-5">Meal</h1>
       <h2 className="font-semibold text-3xl my-2">Database</h2>
+      <h3 className="font-semibold text-xl my-2">
+        It's All About Good Food & Good Taste
+      </h3>
       <p className="font-semibold"> Find Recipe on this DBMeal App!</p>
       <img
         src={restaurant}

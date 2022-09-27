@@ -10,8 +10,8 @@ export default function Card({ meal }) {
           src={meal.strMealThumb}
           alt={meal.strMeal}
         />
-        <h3 className="px-3 pt-2 font-semibold text-2xl">{meal.strMeal}</h3>
-        <h4 className="px-3 font-medium text-xl">{meal.strCategory}</h4>
+        <h3 className="px-3 pt-2 font-semibold text-lg">{meal.strMeal}</h3>
+        <h4 className="px-3 font-medium text-md">{meal.strCategory}</h4>
       </div>
     </Link>
   );

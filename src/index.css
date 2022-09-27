@@ -24,3 +24,11 @@
 .list-ingredients li:nth-child(odd) {
   background-color: #f4d8d2;
 }
+
+.swiper-pagination {
+  position: unset !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #e9a596 !important;
+}

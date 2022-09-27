@@ -1,13 +1,11 @@
 import React from 'react';
 
-export default function PageTitle() {
+export default function PageTitle({ title }) {
   return (
-    <div className="flex  mx-2">
-      <div className="border-b-[1px] border-solid  border-slate-300 w-[40%] transform -translate-y-[30%] "></div>
+    <div className="flex mb-3 justify-center  mx-2">
       <h3 className="font-semibold text-lg text-center mt-4 min-w-[100px]">
-        All Meals
+        {title}
       </h3>
-      <div className="border-b-[1px] border-solid  border-slate-300 w-[40%] transform -translate-y-[30%] "></div>
       <div></div>
     </div>
   );
