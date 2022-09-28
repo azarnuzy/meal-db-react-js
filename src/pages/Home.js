@@ -7,12 +7,17 @@ import { Pagination, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const [category, setCategory] = useState([]);
   const [area, setArea] = useState([]);
   const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [filterCat, setFilterCat] = useState();
+  const [filterArea, setFilterArea] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategory = async () => {
@@ -40,10 +45,38 @@ export default function Home() {
       setMeals(response.data.meals);
     };
 
+    const getFiltersCat = async () => {
+      const res = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCat}`
+      );
+      setCategories(res.data.meals);
+    };
+
+    const getFiltersArea = async () => {
+      const res = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filterArea}`
+      );
+      setAreas(res.data.meals);
+    };
+
     getMeals();
+    getFiltersCat();
+    getFiltersArea();
     getCategory();
     getArea();
-  }, [setArea, setCategory, setMeals]);
+  }, [filterArea, filterCat, setArea, setCategory, setMeals]);
+
+  useEffect(() => {
+    if (areas === null && categories !== null && filterCat !== undefined) {
+      navigate('/search', {
+        state: { mealSearch: categories, meal: filterCat },
+      });
+    }
+
+    if (areas !== null && categories === null && filterArea !== undefined) {
+      navigate('/search', { state: { mealSearch: areas, meal: filterArea } });
+    }
+  }, [areas, categories, filterArea, filterCat, navigate]);
 
   return (
     <>
@@ -106,7 +139,8 @@ export default function Home() {
             return (
               <SwiperSlide
                 key={item.strCategory}
-                className="p-4 flex justify-center items-center rounded-md w-fit text-sm bg-primary font-bold text-[#5e3a32]"
+                onClick={(e) => setFilterCat(e.target.innerText)}
+                className="p-4 flex justify-center hover:opacity-90 items-center rounded-md w-fit text-sm cursor-pointer bg-primary font-bold text-[#5e3a32]"
               >
                 {item.strCategory}
               </SwiperSlide>
@@ -133,7 +167,8 @@ export default function Home() {
             return (
               <SwiperSlide
                 key={item.strArea}
-                className="p-4 flex justify-center items-center rounded-md w-fit text-sm bg-primary font-bold text-[#5e3a32]"
+                onClick={(e) => setFilterArea(e.target.innerText)}
+                className="p-4 cursor-pointer flex justify-center hover:opacity-90 items-center rounded-md w-fit text-sm bg-primary font-bold text-[#5e3a32]"
               >
                 {item.strArea}
               </SwiperSlide>
