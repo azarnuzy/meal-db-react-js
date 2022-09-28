@@ -2,9 +2,13 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Category() {
   const [categories, setCategories] = useState();
+  const [searchCategory, setSearchCategory] = useState();
+  const [resCategory, setResCategory] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -14,8 +18,25 @@ export default function Category() {
 
       setCategories(res.data.meals);
     };
+
+    const getCategory = async () => {
+      const res = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchCategory}`
+      );
+      setResCategory(res.data.meals);
+    };
+
     getCategories();
-  }, [setCategories]);
+    getCategory();
+  }, [searchCategory, setCategories]);
+
+  useEffect(() => {
+    if (searchCategory !== undefined && resCategory !== null) {
+      navigate('/search', {
+        state: { mealSearch: resCategory, meal: searchCategory },
+      });
+    }
+  }, [searchCategory, resCategory, navigate]);
 
   return (
     <div className="mx-2">
@@ -27,7 +48,10 @@ export default function Category() {
           categories.map((item) => (
             <span
               key={item.strCategory}
-              className="px-4 py-3 rounded-md hover:opacity-90 bg-primary text-[#97655a]"
+              onClick={(e) => {
+                setSearchCategory(e.target.innerText);
+              }}
+              className="cursor-pointer px-4 py-3 rounded-md hover:opacity-90 bg-primary text-[#5e3a32]"
             >
               {item.strCategory}
             </span>

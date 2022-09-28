@@ -2,9 +2,13 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Area() {
   const [areas, setAreas] = useState();
+  const [searchArea, setSearchArea] = useState();
+  const [resArea, setResArea] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAreas = async () => {
@@ -14,8 +18,25 @@ export default function Area() {
 
       setAreas(res.data.meals);
     };
+
+    const getArea = async () => {
+      const res = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchArea}`
+      );
+      setResArea(res.data.meals);
+    };
+
+    getArea();
     getAreas();
-  }, [setAreas]);
+  }, [searchArea, setAreas]);
+
+  useEffect(() => {
+    if (searchArea !== undefined && resArea !== null) {
+      navigate('/search', {
+        state: { mealSearch: resArea, meal: searchArea },
+      });
+    }
+  }, [searchArea, resArea, navigate]);
 
   return (
     <div className="mx-2">
@@ -25,7 +46,10 @@ export default function Area() {
           areas.map((item) => (
             <span
               key={item.strArea}
-              className="px-4 py-3 rounded-md hover:opacity-90 bg-primary text-[#97655a]"
+              onClick={(e) => {
+                setSearchArea(e.target.innerText);
+              }}
+              className="px-4 py-3 cursor-pointer rounded-md hover:opacity-90 bg-primary text-[#5e3a32]"
             >
               {item.strArea}
             </span>

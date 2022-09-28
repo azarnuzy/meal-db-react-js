@@ -5,7 +5,6 @@ import PageTitle from '../components/PageTitle';
 
 export default function Search() {
   const location = useLocation();
-
   return (
     <div>
       {location.state.mealSearch !== null && (
