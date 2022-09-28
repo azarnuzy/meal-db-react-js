@@ -3,13 +3,16 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 export default function Detail() {
   const [meal, setMeal] = useState([]);
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  const location = useLocation();
 
+  const isHomeDetail = location.pathname.indexOf('meals') === -1;
+  console.log(isHomeDetail);
   useEffect(() => {
     const getMeal = async () => {
       const res = await axios.get(
@@ -27,14 +30,14 @@ export default function Detail() {
       <div className="max-w-[100vw] mx-2 mt-5">
         <div className="flex justify-between mb-3">
           <div className="ml-3 flex items-center">
-            <Link to="/Meals" className="text-slate-500 text-sm">
+            <Link to="/meals" className="text-slate-500 text-sm">
               Meals
             </Link>
             <span className="text-sm text-slate-400"> &nbsp;/&nbsp; </span>
             <span className="text-sm to-slate-800"> {meal[0].strMeal}</span>
           </div>
           <Link
-            to="/Meals"
+            to={isHomeDetail ? '/' : '/meals'}
             className="flex items-center font-bold px-3 py-1 rounded-2xl text-[#f3c0b5] border border-solid border-[#f3c0b5] hover:opacity-50"
           >
             <AiOutlineArrowLeft className="mr-1" /> Back

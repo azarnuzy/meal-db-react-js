@@ -13,6 +13,7 @@ import Search from './pages/Search';
 function App() {
   const [mealSearch, setMealSearch] = useState([]);
   const [meal, setMeal] = useState('');
+  const [meals, setMeals] = useState([]);
   const navigate = useNavigate();
 
   const handleKeyPressed = (e) => {
@@ -29,8 +30,21 @@ function App() {
       );
       setMealSearch(res.data.meals);
     };
+
+    const fetchPost = async () => {
+      const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+      const randomCharacter =
+        alphabet[Math.floor(Math.random() * alphabet.length)];
+      const client = axios.create({
+        baseURL: 'https://www.themealdb.com/api/json/v1/1',
+      });
+      let response = await client.get(`/search.php?s=${randomCharacter}`);
+      setMeals(response.data.meals);
+    };
+
+    fetchPost();
     getMealSearch();
-  }, [meal]);
+  }, [meal, setMeals]);
 
   return (
     <div className="App font-inter ">
@@ -40,15 +54,11 @@ function App() {
         handleKeyPressed={handleKeyPressed}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} meals={meals} />
+        <Route path="/:id" element={<Detail />} />
         <Route path="meals" element={<Meals />} meals={mealSearch} />
         <Route path="meals/:id" element={<Detail />} />
-        <Route
-          path="search"
-          element={<Search />}
-          mealSearch={mealSearch}
-          meal={meal}
-        />
+        <Route path="search" element={<Search />} />
       </Routes>
       <Footer />
     </div>
