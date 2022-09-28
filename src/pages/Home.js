@@ -51,9 +51,12 @@ export default function Home() {
       <section className="mx-2 my-4">
         <div className="flex justify-between my-3">
           <h3 className="flex items-center font-semibold">All Meals</h3>
-          <span className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90">
+          <Link
+            to="/meals"
+            className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90"
+          >
             View All
-          </span>
+          </Link>
         </div>
         <Swiper
           modules={[Pagination, Scrollbar, A11y]}
@@ -85,9 +88,12 @@ export default function Home() {
           <h3 className=" flex items-center font-semibold">
             Find by Categories
           </h3>
-          <span className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90">
+          <Link
+            to="/category"
+            className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90"
+          >
             View All
-          </span>
+          </Link>
         </div>
         <Swiper
           modules={[Pagination, Scrollbar, A11y]}
@@ -109,9 +115,12 @@ export default function Home() {
         </Swiper>
         <div className="mt-5 flex justify-between my-3 relative">
           <h3 className="flex items-center font-semibold">Find by Areas</h3>
-          <span className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90">
+          <Link
+            to="/area"
+            className="py-1 px-4 bg-primary text-[#97655a] rounded-xl hover:opacity-90"
+          >
             View All
-          </span>
+          </Link>
         </div>
         <Swiper
           modules={[Pagination, Scrollbar, A11y]}

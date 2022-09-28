@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
-import Header from '../components/Header';
 import PageTitle from '../components/PageTitle';
 
 export default function Meals() {
