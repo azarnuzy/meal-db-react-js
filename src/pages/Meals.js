@@ -24,7 +24,7 @@ export default function Meals() {
   return (
     <>
       <PageTitle title="All Meals" />
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-5 justify-center">
         {meals.map((meal) => {
           return <Card key={meal.idMeal} meal={meal} />;
         })}

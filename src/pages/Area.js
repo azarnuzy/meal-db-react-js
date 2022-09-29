@@ -39,9 +39,9 @@ export default function Area() {
   }, [searchArea, resArea, navigate]);
 
   return (
-    <div className="mx-2">
+    <div className="mx-5">
       <h2 className="font-bold text-lg text-center my-3">Search by Areas</h2>
-      <div className="grid grid-cols-3 gap-2 justify-between">
+      <div className="grid grid-cols-2  sm:grid-cols-3  gap-2 justify-between">
         {areas !== undefined &&
           areas.map((item) => (
             <span

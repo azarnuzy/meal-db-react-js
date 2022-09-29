@@ -36,7 +36,7 @@ function App() {
   }, [meal]);
 
   return (
-    <div className="App font-inter ">
+    <div className="App font-inter max-w-6xl m-auto md:mx-4 lg:mx-auto">
       <Navbar
         meal={meal}
         setMeal={setMeal}
