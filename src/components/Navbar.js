@@ -1,14 +1,14 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 export default function Navbar({ meal, setMeal, handleKeyPressed }) {
   return (
     <nav className="flex  flex-col md:flex-wrap md:justify-between md:gap-5 md:mx-10 md:flex-row lg:flex-row mx-6 md:mt-3">
       <div className="relative flex items-center">
         <div className="w-20 h-20 m-auto absolute top-0 right-1/2 transform rotate-45 translate-x-1/2 -z-10 -translate-y-[43%] lg:-translate-y-[45%] lg:w-25 lg:h-25 rounded-md  bg-primary"></div>
-        <h1 className="font-bold text-2xl md:mb-0 mt-3 md:mt-0 m-auto">
+        <Link to="/" className="font-bold text-2xl md:mb-0 mt-3 md:mt-0 m-auto">
           DBMeal
-        </h1>
+        </Link>
       </div>
       <ul className="flex justify-center gap-8 my-4 lg:order-last">
         <NavLink

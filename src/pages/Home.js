@@ -17,7 +17,20 @@ export default function Home() {
   const [areas, setAreas] = useState([]);
   const [filterCat, setFilterCat] = useState();
   const [filterArea, setFilterArea] = useState();
+  const [windowSize, setWindowSize] = useState(getWindowSize());
   const navigate = useNavigate();
+
+  const getSlidesPerView = () => {
+    if (windowSize.innerWidth > 1280) {
+      return 6;
+    } else if (windowSize.innerWidth > 1024) {
+      return 5;
+    } else if (windowSize.innerWidth > 768) {
+      return 4;
+    } else {
+      return 3;
+    }
+  };
 
   useEffect(() => {
     const getCategory = async () => {
@@ -78,6 +91,23 @@ export default function Home() {
     }
   }, [areas, categories, filterArea, filterCat, navigate]);
 
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
   return (
     <>
       <Header />
@@ -96,7 +126,7 @@ export default function Home() {
           spaceBetween={10}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          slidesPerView={3}
+          slidesPerView={getSlidesPerView()}
         >
           {meals.map((item) => {
             return (
@@ -105,13 +135,15 @@ export default function Home() {
                 className="p-2 flex justify-center items-center rounded-md w-fit text-sm  font-bold text-[#5e3a32] flex-col h-fit hover:opacity-90 cursor-pointer text-center"
               >
                 <Link to={`/${item.idMeal}`}>
-                  <img
-                    src={item.strMealThumb}
-                    alt={item.strMeal}
-                    className="rounded-full p-2"
-                  />
+                  <div>
+                    <img
+                      src={item.strMealThumb}
+                      alt={item.strMeal}
+                      className="rounded-full p-2"
+                    />
 
-                  {item.strMeal}
+                    {item.strMeal}
+                  </div>
                 </Link>
               </SwiperSlide>
             );
@@ -133,7 +165,7 @@ export default function Home() {
           spaceBetween={20}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          slidesPerView={4}
+          slidesPerView={getSlidesPerView()}
         >
           {category.map((item) => {
             return (
@@ -161,7 +193,7 @@ export default function Home() {
           spaceBetween={10}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          slidesPerView={4}
+          slidesPerView={getSlidesPerView()}
         >
           {area.map((item) => {
             return (
