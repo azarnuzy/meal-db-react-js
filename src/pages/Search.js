@@ -10,7 +10,7 @@ export default function Search() {
       {location.state.mealSearch !== null && (
         <PageTitle title={`Search Result "${location.state.meal}"`} />
       )}
-      <div className="grid grid-cols-1 gap-3 mt-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-5 justify-center mt-3">
         {location.state.mealSearch !== null &&
           location.state.mealSearch.length > 0 &&
           location.state.mealSearch.map((meal) => {

@@ -43,34 +43,38 @@ export default function Detail() {
             <AiOutlineArrowLeft className="mr-1" /> Back
           </Link>
         </div>
-        <img
-          src={meal[0].strMealThumb}
-          className="max-h-[300px] w-screen object-cover rounded-xl shadow-md"
-          alt=""
-        />
-        <span className="mt-3 ml-2 font-bold text-lg block ">
-          {meal[0].strMeal}
-        </span>
-        <div className="mt-1 mx-3 border-b-2 border-solid border-slate-200 pb-3">
-          <table className="text-left text-md mb-3 mr-0">
-            <tbody>
-              <tr>
-                <th className="w-[30vw]">Category</th>
-                <td>{meal[0].strCategory}</td>
-              </tr>
-              <tr>
-                <th className="w-[30vw]">Area</th>
-                <td>{meal[0].strArea}</td>
-              </tr>
-              <tr>
-                <th className="w-[30vw]">Tags</th>
-                <td>{meal[0].strTags}</td>
-              </tr>
-            </tbody>
-          </table>
-          <span className="text-justify text-sm inline-block">
-            {meal[0].strInstructions}
-          </span>
+        <div className="flex flex-col md:flex-row md:gap-5">
+          <img
+            src={meal[0].strMealThumb}
+            className="max-h-[300px] mx-2 w-screen object-cover rounded-xl shadow-md"
+            alt=""
+          />
+          <div>
+            <span className="mt-3 mx-3 font-bold text-lg block ">
+              {meal[0].strMeal}
+            </span>
+            <div className="mt-1 mx-3 border-b-2 border-solid border-slate-200 pb-3">
+              <table className="text-left text-md mb-3 mr-0">
+                <tbody>
+                  <tr>
+                    <th className="w-[30vw]">Category</th>
+                    <td>{meal[0].strCategory}</td>
+                  </tr>
+                  <tr>
+                    <th className="w-[30vw]">Area</th>
+                    <td>{meal[0].strArea}</td>
+                  </tr>
+                  <tr>
+                    <th className="w-[30vw]">Tags</th>
+                    <td>{meal[0].strTags}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span className="text-justify text-sm inline-block">
+                {meal[0].strInstructions}
+              </span>
+            </div>
+          </div>
         </div>
         <h3 className="text-lg font-semibold mt-2 mx-3">Ingredients</h3>
         <div className="mt-2 mx-3 border border-solid border-slate-200 shadow-md">

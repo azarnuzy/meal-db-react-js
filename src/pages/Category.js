@@ -49,16 +49,20 @@ export default function Category() {
             <Link
               key={item.strCategory}
               onClick={(e) => {
-                setSearchCategory(e.target.innerText);
+                setSearchCategory(
+                  e.target.innerText || e.target.getAttribute('alt')
+                );
               }}
               className="cursor-pointer px-4 py-3 rounded-md hover:opacity-90 bg-primary text-center text-[#5e3a32]"
             >
-              <img
-                src={item.strCategoryThumb}
-                alt=""
-                className="p-2 rounded-full"
-              />
-              <span>{item.strCategory}</span>
+              <div>
+                <img
+                  src={item.strCategoryThumb}
+                  alt={item.strCategory}
+                  className="p-2 rounded-full"
+                />
+                <span>{item.strCategory}</span>
+              </div>
             </Link>
           ))}
       </div>
