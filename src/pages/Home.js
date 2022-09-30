@@ -33,62 +33,66 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const getCategory = async () => {
-      const resCategory = await axios.get(
-        'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
-      );
-      setCategory(resCategory.data.meals);
-    };
+    try {
+      const getCategory = async () => {
+        const resCategory = await axios.get(
+          'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+        );
+        setCategory(resCategory.data.meals);
+      };
 
-    const getArea = async () => {
-      const resArea = await axios.get(
-        'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
-      );
-      setArea(resArea.data.meals);
-    };
+      const getArea = async () => {
+        const resArea = await axios.get(
+          'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
+        );
+        setArea(resArea.data.meals);
+      };
 
-    const getMeals = async () => {
-      const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-      const randomCharacter =
-        alphabet[Math.floor(Math.random() * alphabet.length)];
-      const client = axios.create({
-        baseURL: 'https://www.themealdb.com/api/json/v1/1',
-      });
-      let response = await client.get(`/search.php?s=${randomCharacter}`);
-      setMeals(response.data.meals);
-    };
+      const getMeals = async () => {
+        const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+        const randomCharacter =
+          alphabet[Math.floor(Math.random() * alphabet.length)];
+        const client = axios.create({
+          baseURL: 'https://www.themealdb.com/api/json/v1/1',
+        });
+        let response = await client.get(`/search.php?s=${randomCharacter}`);
+        setMeals(response.data.meals);
+      };
 
-    const getFiltersCat = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCat}`
-      );
-      setCategories(res.data.meals);
-    };
+      const getFiltersCat = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCat}`
+        );
+        setCategories(res.data.meals);
+      };
 
-    const getFiltersArea = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filterArea}`
-      );
-      setAreas(res.data.meals);
-    };
+      const getFiltersArea = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filterArea}`
+        );
+        setAreas(res.data.meals);
+      };
 
-    getMeals();
-    getFiltersCat();
-    getFiltersArea();
-    getCategory();
-    getArea();
+      getMeals();
+      getFiltersCat();
+      getFiltersArea();
+      getCategory();
+      getArea();
+    } catch (error) {}
   }, [filterArea, filterCat, setArea, setCategory, setMeals]);
 
   useEffect(() => {
-    if (areas === null && categories !== null && filterCat !== undefined) {
-      navigate('/search', {
-        state: { mealSearch: categories, meal: filterCat },
-      });
-    }
+    try {
+      if (areas === null && categories !== null && filterCat !== undefined) {
+        navigate('/search', {
+          state: { mealSearch: categories, meal: filterCat },
+        });
+      }
 
-    if (areas !== null && categories === null && filterArea !== undefined) {
-      navigate('/search', { state: { mealSearch: areas, meal: filterArea } });
-    }
+      if (areas !== null && categories === null && filterArea !== undefined) {
+        navigate('/search', { state: { mealSearch: areas, meal: filterArea } });
+      }
+    } catch (error) {}
   }, [areas, categories, filterArea, filterCat, navigate]);
 
   function getWindowSize() {
@@ -97,15 +101,17 @@ export default function Home() {
   }
 
   useEffect(() => {
-    function handleWindowResize() {
-      setWindowSize(getWindowSize());
-    }
+    try {
+      function handleWindowResize() {
+        setWindowSize(getWindowSize());
+      }
 
-    window.addEventListener('resize', handleWindowResize);
+      window.addEventListener('resize', handleWindowResize);
 
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    } catch (error) {}
   }, []);
 
   return (

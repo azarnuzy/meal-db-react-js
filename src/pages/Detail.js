@@ -12,20 +12,36 @@ export default function Detail() {
   const location = useLocation();
 
   const isHomeDetail = location.pathname.indexOf('meals') === -1;
-  console.log(isHomeDetail);
-  useEffect(() => {
-    const getMeal = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`
-      );
-      setMeal(res.data.meals);
-      setLoading(false);
-    };
 
-    getMeal();
+  useEffect(() => {
+    try {
+      const getMeal = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`
+        );
+        setMeal(res.data.meals);
+        setLoading(false);
+      };
+
+      getMeal();
+    } catch (error) {}
   }, [params, setMeal, setLoading]);
 
   if (meal.length > 0) {
+    // get Ingredients and Measures
+    const ingredients = [];
+    const measures = [];
+    let i = 0;
+    for (const ingredient in meal[0]) {
+      if (ingredient.indexOf(`Ingredient`) > 0) {
+        ingredients.push(meal[0][ingredient]);
+      }
+
+      if (ingredient.indexOf(`Measure`) > 0) {
+        measures.push(meal[0][ingredient]);
+      }
+    }
+
     return (
       <div className="max-w-[100vw] mx-2 mt-5">
         <div className="flex justify-between mb-3">
@@ -79,54 +95,13 @@ export default function Detail() {
         <h3 className="text-lg font-semibold mt-2 mx-3">Ingredients</h3>
         <div className="mt-2 mx-3 border border-solid border-slate-200 shadow-md">
           <ul className="list-ingredients text-sm p-3 list-none">
-            <li>
-              {meal[0].strMeasure1} {meal[0].strIngredient1}
-            </li>
-            <li>
-              {meal[0].strMeasure2} {meal[0].strIngredient2}
-            </li>
-            <li>
-              {meal[0].strMeasure3} {meal[0].strIngredient3}
-            </li>
-            <li>
-              {meal[0].strMeasure4} {meal[0].strIngredient4}
-            </li>
-            <li>
-              {meal[0].strMeasure5} {meal[0].strIngredient5}
-            </li>
-            <li>
-              {meal[0].strMeasure6} {meal[0].strIngredient6}
-            </li>
-            <li>
-              {meal[0].strMeasure7} {meal[0].strIngredient7}
-            </li>
-            <li>
-              {meal[0].strMeasure8} {meal[0].strIngredient8}
-            </li>
-            <li>
-              {meal[0].strMeasure9} {meal[0].strIngredient9}
-            </li>
-            <li>
-              {meal[0].strMeasure10} {meal[0].strIngredient10}
-            </li>
-            <li>
-              {meal[0].strMeasure11} {meal[0].strIngredient11}
-            </li>
-            <li>
-              {meal[0].strMeasure12} {meal[0].strIngredient12}
-            </li>
-            <li>
-              {meal[0].strMeasure13} {meal[0].strIngredient13}
-            </li>
-            <li>
-              {meal[0].strMeasure14} {meal[0].strIngredient14}
-            </li>
-            <li>
-              {meal[0].strMeasure15} {meal[0].strIngredient15}
-            </li>
-            <li>
-              {meal[0].strMeasure16} {meal[0].strIngredient16}
-            </li>
+            {ingredients.map((item) => {
+              return (
+                <li key={`${item}${i}`}>
+                  {measures[i++]} {item}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

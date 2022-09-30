@@ -11,31 +11,35 @@ export default function Category() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getCategories = async () => {
-      const res = await axios.get(
-        'https://www.themealdb.com/api/json/v1/1/categories.php'
-      );
+    try {
+      const getCategories = async () => {
+        const res = await axios.get(
+          'https://www.themealdb.com/api/json/v1/1/categories.php'
+        );
 
-      setCategories(res.data.categories);
-    };
+        setCategories(res.data.categories);
+      };
 
-    const getCategory = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchCategory}`
-      );
-      setResCategory(res.data.meals);
-    };
+      const getCategory = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchCategory}`
+        );
+        setResCategory(res.data.meals);
+      };
 
-    getCategories();
-    getCategory();
+      getCategories();
+      getCategory();
+    } catch (error) {}
   }, [searchCategory, setCategories]);
 
   useEffect(() => {
-    if (searchCategory !== undefined && resCategory !== null) {
-      navigate('/search', {
-        state: { mealSearch: resCategory, meal: searchCategory },
-      });
-    }
+    try {
+      if (searchCategory !== undefined && resCategory !== null) {
+        navigate('/search', {
+          state: { mealSearch: resCategory, meal: searchCategory },
+        });
+      }
+    } catch (error) {}
   }, [searchCategory, resCategory, navigate]);
 
   return (

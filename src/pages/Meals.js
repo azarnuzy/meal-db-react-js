@@ -7,18 +7,20 @@ export default function Meals() {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-      const randomCharacter =
-        alphabet[Math.floor(Math.random() * alphabet.length)];
-      const client = axios.create({
-        baseURL: 'https://www.themealdb.com/api/json/v1/1',
-      });
-      let response = await client.get(`/search.php?s=${randomCharacter}`);
-      setMeals(response.data.meals);
-    };
+    try {
+      const fetchPost = async () => {
+        const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+        const randomCharacter =
+          alphabet[Math.floor(Math.random() * alphabet.length)];
+        const client = axios.create({
+          baseURL: 'https://www.themealdb.com/api/json/v1/1',
+        });
+        let response = await client.get(`/search.php?s=${randomCharacter}`);
+        setMeals(response.data.meals);
+      };
 
-    fetchPost();
+      fetchPost();
+    } catch (error) {}
   }, []);
 
   return (

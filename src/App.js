@@ -25,14 +25,16 @@ function App() {
   };
 
   useEffect(() => {
-    const getMealSearch = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`
-      );
-      setMealSearch(res.data.meals);
-    };
+    try {
+      const getMealSearch = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`
+        );
+        setMealSearch(res.data.meals);
+      };
 
-    getMealSearch();
+      getMealSearch();
+    } catch (error) {}
   }, [meal]);
 
   return (

@@ -11,37 +11,41 @@ export default function Area() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getAreas = async () => {
-      const res = await axios.get(
-        'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
-      );
+    try {
+      const getAreas = async () => {
+        const res = await axios.get(
+          'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
+        );
 
-      setAreas(res.data.meals);
-    };
+        setAreas(res.data.meals);
+      };
 
-    const getArea = async () => {
-      const res = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchArea}`
-      );
-      setResArea(res.data.meals);
-    };
+      const getArea = async () => {
+        const res = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchArea}`
+        );
+        setResArea(res.data.meals);
+      };
 
-    getArea();
-    getAreas();
+      getArea();
+      getAreas();
+    } catch (error) {}
   }, [searchArea, setAreas]);
 
   useEffect(() => {
-    if (searchArea !== undefined && resArea !== null) {
-      navigate('/search', {
-        state: { mealSearch: resArea, meal: searchArea },
-      });
-    }
+    try {
+      if (searchArea !== undefined && resArea !== null) {
+        navigate('/search', {
+          state: { mealSearch: resArea, meal: searchArea },
+        });
+      }
+    } catch (error) {}
   }, [searchArea, resArea, navigate]);
 
   return (
     <div className="mx-5">
       <h2 className="font-bold text-lg text-center my-3">Search by Areas</h2>
-      <div className="grid grid-cols-2  sm:grid-cols-3  gap-2 justify-between">
+      <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4  gap-2 justify-between">
         {areas !== undefined &&
           areas.map((item) => (
             <span
